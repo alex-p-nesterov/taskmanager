@@ -1,0 +1,77 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+{{project}}
+{% endblock%}
+{% block data %}
+
+<div class="container">
+	<div class="count_section">
+	<p><h1>{{project}}</h1> <a href="{% url 'updateproject' project.id %}">Изменить</a></p>
+	<div class="count">
+		<div>
+		<p><b>Всего:</b> {{all_count}}</p>
+		<p><b>Завершено:</b> {{done_count}}</p>
+		<p><b>На доработке:</b> {{reup_count }}</p>
+		</div>
+	</div>
+</div>
+<div class="tasks_container">
+	<div class="tasks_section">
+		<div class="task_block">
+			
+			<p><b>В работе:</b><a href="{% url 'createtask' %}">+</a></p>
+			{% for task in wip_tasks %}
+				<div class="task">
+					<p><b><a href="{% url 'uptatetask' task.id %}">{{task}}</a></b></p>
+					<p><span class="tag">Исполнитель: </span> {{task.author}}</p>
+					<p><span class="tag">Дата создания: </span> {{task.create_at}}</p>
+					<p><span class="tag">Дедлайн: </span> {{task.deadline}}</p>
+					{% if task.attachment %}
+						<p><span class="tag">Вложение: </span> <a href="{{task.attachment.url }}">скачать</a></p>
+					{% endif %}
+				</div>
+			{% endfor %}
+		
+		</div>
+		<div class="task_block">
+				<p><b>Завершенные</b></p>
+				{% for task in done_tasks %}
+					<div class="task">
+						<p><b><a href="{% url 'uptatetask' task.id %}">{{task}}</a></b></p>
+						<p><span class="tag">Исполнитель: </span> {{task.author}}</p>
+						<p><span class="tag">Дата создания: </span> {{task.create_at}}</p>
+						<p><span class="tag">Дедлайн: </span> {{task.deadline}}</p>
+						{% if task.attachment %}
+							<p><span class="tag">Вложение: </span> <a href="{{task.attachment.url }}">скачать</a></p>
+						{% endif %}
+					</div>
+				{% endfor %}
+		</div>
+		<div class="task_block">
+			<p><b>Изменить</b></p>
+			{% for task in reup_tasks %}
+				<div class="task">
+					<p><b><a href="{% url 'uptatetask' task.id %}">{{task}}</a></b></p>
+					<p><span class="tag">Исполнитель: </span> {{task.author}}</p>
+					<p><span class="tag">Дата создания: </span> {{task.create_at}}</p>
+					<p><span class="tag">Дедлайн: </span> {{task.deadline}}</p>
+					{% if task.attachment %}
+						<p><span class="tag">Вложение: </span> <a href="{{task.attachment.url }}">скачать</a></p>
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock%}

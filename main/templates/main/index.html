@@ -1,0 +1,78 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Главная
+{% endblock%}
+{% block data %} 
+<style type="text/css">
+	
+.table {
+	width: 100%;
+	margin-bottom: 20px;
+	border: 1px solid #dddddd;
+	border-collapse: collapse; 
+}
+.table th {
+	font-weight: bold;
+	padding: 5px;
+	background: #F0FFFF;
+	border: 1px solid #dddddd;
+}
+.table td {
+	border: 1px solid #dddddd;
+	padding: 5px;
+	background: #sss;
+}
+.project {width: 75%}
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+} 
+.report {
+	width: 200px; 
+	
+	background: #fff;
+	margin-left:10px;
+	margin-top:10px;
+
+}
+</style>
+<div class="container"><a href="{% url 'createproject' %}">Создать</a>
+		<div class="project">
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Название</th>
+					<th>Автор</th>
+					<th>Статус</th>
+					<th>Отчет</th>
+				</tr>
+				</thead>
+		{% for project in projects %}
+				<tr>
+					<td><a href="{%url 'project' project.id %}">{{project}}</a></td>
+					<td>{{project.author}}</td>
+					<td>{{project.get_status_display}}</td>
+					<td><a href="{% url 'report' project.id %}">создать отчет</a></td>
+				</tr>
+		{% endfor %}
+			</table> 
+
+		</div>
+
+	<div class="report">
+	<h3>Отчеты</h3>
+	<h4>Базовые</h4>
+	<p><a href="{% url 'reportproject'%}">Отчет по проектам</a></p>
+	<p><a href="{% url 'reporttask'%}">Отчет по задачам</a></p>
+	<hr>
+	<h4>Генерируемые</h4>
+	{% for report in reports %}
+		<p><a href="{% url 'report' report.id %}">{{ report }}</a></p>
+	{% endfor %}
+	</div>
+	
+</div>
+
+{% endblock%}

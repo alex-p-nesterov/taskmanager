@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Задача
+{% endblock%}
+{% block data %} 
+<style type="text/css">
+	p {
+		width: 300px;
+	}
+	input {
+		width: 300px;
+	}
+	select {
+		width: 300px;
+	}
+</style>
+<form action="." method="POST">
+	{{form.as_p}}
+	{% csrf_token %}
+	<p><input type="button" name="ok" value="Ок"></p>
+</form>
+
+
+{% endblock%}

@@ -1,0 +1,128 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %} {%endblock%}</title>
+
+	<style type="text/css">
+html {
+    height: 100%;
+    box-sizing: border-box; /* https://css-tricks.com/box-sizing/ */
+}
+
+*, *:before, *:after {
+  box-sizing: inherit; /* https://css-tricks.com/box-sizing/ */
+}
+
+body {
+    margin: 0;
+    min-height: 100%;
+    display: flex; /* body is the outer flex container */
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+#inner-flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: calc(100% - 250px);
+}
+
+aside   { flex: 1 250px; background: #87c7af; }
+header  { flex: 1; background: tomato; }
+section { flex: 4; background: #d7f5ff; }
+footer  { flex: 1; background: lightgreen; }	
+
+
+.count {
+	text-align: left;
+	display: block;
+	border-radius: 5px;
+	margin: 10px;
+	padding-left: 5px;
+	background: #93def5;
+	max-width: 150px;
+}
+.tasks_section {
+	display: grid;
+  	grid-template-columns: repeat(3, minmax(200px, 1fr));
+  	grid-gap: 10px 10px;
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}  
+.tasks_container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+}
+.task_block {
+	text-align: left;
+	display: block;
+	border-radius: 5px;
+	margin: 10px;
+	padding-left: 5px;
+	background: #93def5;
+	max-width: 400px;
+}
+.task {
+	text-align: left;
+	display: block;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 5px;
+	background: #d7f5ff;
+}
+.tag {
+	color: gray;
+}
+.login_container {
+	width: 100%;
+	display: flex;
+  	flex-flow: row wrap;
+  	justify-content: center;
+  	padding-top: 5%;
+}
+.login__block {
+	display: block;
+	height: 250px;
+	background: #92def6;
+	border-radius: 10px;
+	box-shadow: 15px 15px 5px -5px rgba(0,0,0,.3);
+	padding: 10px;
+
+}
+.lgn_input {
+	margin-bottom: 15px;
+	width: 350px;
+	height: 40px;
+	
+}
+
+</style>
+</head>
+<body>
+<aside>	<p><img src="{% static 'notes_1434399719.png' %}" style="width: 100px;"></p>
+		<p><a href="{% url 'index' %}">Главная</a></p>
+	    {% if user.is_authenticated %}
+			<p><a href="{% url 'logout' %}">Выйти</a></p>
+		{% else %}
+			<p><a href="{% url 'login' %}">Войти</a></p>
+		{% endif %}
+
+</aside>
+<div id="inner-flex-container">
+
+    <section>{% block data %} {% endblock %}</section>
+    
+</div>
+</body>
+</html>

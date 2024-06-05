@@ -1,0 +1,28 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Задача
+{% endblock%}
+{% block data %} 
+<style type="text/css">
+	p {
+		width: 200px;
+	}
+	input {
+		width: 200px;
+	}
+	select {
+		width: 200px;
+	}
+	textarea {
+		width: 500;
+	}
+</style>
+<form method="post" enctype='multipart/form-data'>
+	{{form.as_p}}
+	{% csrf_token %}
+	<p><input type="submit" value="Update"></p>
+</form>
+
+
+{% endblock%}

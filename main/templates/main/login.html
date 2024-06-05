@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Главная
+{% endblock%}
+{% block data %} 
+
+<div class="login_container">
+	<div class="login__block">
+		<form action="." method="POST" class="lgn_input">
+			 {% csrf_token %}
+			<input type="text" name="login" class="lgn_input">
+			<input type="password" name="password" class="lgn_input">
+			<button class="lgn_input">Войти</button>
+			<div class="error">{{error}}</div>
+		</form>
+	</div>
+</div>
+
+
+{% endblock%}

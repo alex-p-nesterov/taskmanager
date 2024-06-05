@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Главная
+{% endblock%}
+{% block data %}
+
+{% load static %}
+<script
+src="{% static 'Chart.js' %}">
+</script>
+<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+<script type="text/javascript">
+	var xValues = [
+		{% for date in dates %}
+			'{{date}}',
+		{% endfor %}
+		];
+	var yValues = [
+		{% for count in counts %}
+			{{count}},
+		{% endfor %}
+
+		];
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+    	label: '{{label}}',
+      backgroundColor: "rgba(0,0,0,1.0)",
+      borderColor: "rgba(0,0,0,0.1)",
+      data: yValues
+    }]
+  },
+  options:{}
+});
+</script> 
+{% endblock%}
